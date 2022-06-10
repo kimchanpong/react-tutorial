@@ -86,4 +86,72 @@ class LoginControl extends React.Component {
     }
 }
 
+class Mailbox extends React.Component {
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            unreadMsg: props.unreadMsg
+        }
+    }
+
+    render() {
+        const unreadMsg = this.state.unreadMsg;
+
+        return (
+            <div>
+                <h1>안녕!</h1>
+                {
+                    unreadMsg.length > 0 &&
+                    <h2>
+                        당신은 {unreadMsg.length}건의 메세지를 가졌습니다.
+                    </h2>
+                }
+            </div>
+        );
+    }
+}
+
+// const msg = ['a', 'b', 'c'];
+const msg = [];
+
+function WarningBanner(props) {
+    if(!props.warn) {
+        return null;
+    }
+
+    return (
+        <div className="warning">
+            위험!!
+        </div>
+    );
+}
+
+class Page extends React.Component {
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            showWarning: true
+        }
+    }
+
+    handleToggleClick = () => {
+        this.setState(state => ({
+            showWarning: !state.showWarning
+        }));
+    }
+
+    render() {
+        return (
+            <div>
+                <WarningBanner warn={this.state.showWarning} />
+                <button onClick={this.handleToggleClick}>
+                    {this.state.showWarning ? 'Hide' : 'Show'}
+                </button>
+            </div>
+        )
+    }
+}
+
 export default LoginControl;
